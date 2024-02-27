@@ -6,7 +6,13 @@ on:
 jobs:
   build-gvmi:
     name: Build Node.js GVMI
+
+    strategy:
+      matrix:
+        version: [18, 18-alpine, 20, 20-alpine, latest]
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout files
         uses: actions/checkout@v3
@@ -14,9 +20,11 @@ jobs:
       - name: Install gvmkit-build
         run: pip install gvmkit-build
 
-      - name: Build the image and push to registry
+      - name: Build ${{ matrix.version }}
         working-directory: ./images/node
         env:
           REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
           REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
-        run: ./build.sh
+        run: |
+          docker build -t golem/node:${{ matrix.version }} -f Dockerfile.${{ matrix.version }} .
+          gvmkit-build --push golem/node:${{ matrix.version }}
