@@ -16,4 +16,7 @@ jobs:
 
       - name: Build the image and push to registry
         working-directory: ./images/node
+        env:
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
         run: ./build.sh
