@@ -1,0 +1,18 @@
+name: Build Node.js image
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "@daily"
+jobs:
+  build-gvmi:
+    name: Build Node.js GVMI
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v3
+
+      - name: Install gvmkit-build
+        run: pip install gvmkit-build
+
+      - name: Build the image and push to registry
+        working-directory: ./images/node
+        run: ./build.sh
