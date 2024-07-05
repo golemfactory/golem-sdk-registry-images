@@ -24,7 +24,7 @@ jobs:
         run: pip install gvmkit-build
 
       - name: Build ${{ matrix.version }}
-        working-directory: ./images/node
+        working-directory: ./images/docker
         env:
           REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
           REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
