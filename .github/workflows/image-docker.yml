@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       max-parallel: 1
       matrix:
-        version: [27, 27-cli]
+        version: [27, 27-cli, 27-dind]
 
     runs-on: ubuntu-latest
 
