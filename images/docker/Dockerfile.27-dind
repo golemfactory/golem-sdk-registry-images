@@ -2,4 +2,4 @@
 FROM docker:27-dind
 
 # Important for golem to be able to write files to disk
-VOLUME /var/lib/docker
+VOLUME /var/lib/docker /var/run/docker
