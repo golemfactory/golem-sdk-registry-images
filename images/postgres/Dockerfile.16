@@ -2,4 +2,6 @@ FROM postgres:16
 
 # We need to be explicit about this one
 VOLUME /var/lib/postgresql/data/pgdata
-WORKDIR /
+
+VOLUME /golem/work
+WORKDIR /golem/work
