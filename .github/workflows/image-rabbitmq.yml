@@ -1,0 +1,27 @@
+name: Build RabbitMQ image
+on:
+  workflow_dispatch:
+  schedule:
+    # Do it on Mondays :)
+    - cron: "0 0 * * 1"
+jobs:
+  build-gvmi:
+    name: Build rabbitmq GVMI
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout files
+        uses: actions/checkout@v3
+
+      - name: Install gvmkit-build
+        run: pip install gvmkit-build
+
+      - name: Build and publish image
+        working-directory: ./images/rabbitmq
+        env:
+          REGISTRY_USER: ${{ secrets.REGISTRY_USER }}
+          REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+        run: |
+          docker build -t golem/rabbitmq:3-management -f Dockerfile.3-management .
+          gvmkit-build --push golem/rabbitmq:3-management
