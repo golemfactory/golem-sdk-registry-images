@@ -1,1 +1,5 @@
 FROM rabbitmq:3-management
+
+# Added to alleviate the current shortcoming of Golem storage implementation which requires a volume
+# to be defined in order to access the storage on the provider
+VOLUME /storage

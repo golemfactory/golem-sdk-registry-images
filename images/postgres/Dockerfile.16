@@ -3,5 +3,6 @@ FROM postgres:16
 # We need to be explicit about this one
 VOLUME /var/lib/postgresql/data
 
-# If you plan to `transfer` files into the activity, make sure you're having a proper volume for this
-VOLUME /golem/work
+# Added to alleviate the current shortcoming of Golem storage implementation which requires a volume
+# to be defined in order to access the storage on the provider
+VOLUME /storage
