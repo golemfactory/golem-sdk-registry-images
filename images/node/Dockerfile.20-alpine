@@ -6,3 +6,6 @@ RUN rm -rf /var/cache/apk/*
 # Added to alleviate the current shortcoming of Golem storage implementation which requires a volume
 # to be defined in order to access the storage on the provider
 VOLUME /storage
+
+# DEPRECATED: Backward compatibility volumes, the will be removed in future, do not rely on them
+VOLUME /golem/input /golem/output /golem/work
